@@ -1,0 +1,63 @@
+npx prisma migrate dev --name add-user-account //add table and update
+
+npx prisma migrate dev --name remove-user-account //drop table in prisma model thou shall not manually drop in postgres
+
+npx prisma migrate reset //reset prisma and might delete data
+
+------------------------------------------------------------------------------------------------------------------------
+
+git status //check if there are changes/check status
+
+git add . //to add everything/stage everything
+
+git add filename.ext //to add specific filename
+
+git commit -m "Describe your changes" //to commit changes
+
+git push //to push and finish 
+
+git push -u origin main //if first push
+
+if git commit says "nothing to commit" then git doesnt see any staged or changes.
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+npm run dev //run backend and frontend
+
+npm install antd //good for tables and forms, usually used in admin and business systems
+
+npm install tailwindcss //common for styling react
+
+npm install @mui/material //large collections of ready-made components
+
+npm install lucide-react //react icons [example:  import { Home } from "lucide-react";]
+
+npm install react-icons //font awesome, bootstrap icons, hero icons, many others
+
+npm install framer-motion // {[example: 
+
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+>
+  Hello
+</motion.div>
+
+]}
+
+------------------------------------------------------------------------------------------------------------------------
+
+common stack:
+ Tailwind CSS
+shadcn/ui
+Lucide React
+Framer Motion
+
+
+extensions:
+prettier code formatter
+docker
+es7 react
+react
+tailwind css

@@ -1,0 +1,110 @@
+MAIN TASK: DEVELOP A WEB APP TO EXERCISE SKILLS
+
+
+<---------------------------------------------------------------------->
+
+Tech Stack: 
+
+    Frontend       
+
+React JS + Vite
+Tailwind CSS/Material UI
+Typescript
+React Router - page navigation
+API calls - native fetch() or axios
+React Context API - state management
+React Hook Forms - Forms
+TanStack Query - data fetching
+React Icons - icons
+React Toastify - notifications
+
+   Backend
+
+Core Backend Stack:
+Node.js — JavaScript runtime
+Express — Web framework
+Prisma — ORM
+
+Database:
+PostgreSQL
+
+Authentication & Security:
+jsonwebtoken (JWT authentication)
+bcrypt (password hashing)
+helmet (security headers)
+cors (cross-origin requests)
+
+Validation:
+Zod - Excellent for request validation and works nicely with TypeScript. 
+
+<---------------------------------------------------------------------->
+
+                                TASK 
+
+Frontend:
+E-commerce( sample ecommerce web app to show transaction or info management
+
+
+)
+Admin( Inventory Management
+-Page route
+-Create an admin dashboard
+-Create forms
+-Create API for fetching data
+-Try to create simple inventory system
+
+)
+
+
+Portfolio( to exercise web ui/ux design
+
+
+)
+
+Backend:
+
+
+Database:
+
+Security:
+
+Deployment:
+
+
+
+Jeonsoft:
+
+Intern
+
+Log in
+Create account 
+    -name
+    -school
+    -year level
+    -course
+    -hours required
+    -email
+    -password
+    -whatsapp number
+Dashboard
+    -log history
+    -pogress bar
+    -task today and task done
+    -DTR
+
+Employees
+
+Log in
+Create account 
+    -name
+    -Position
+    -Department
+    -email
+    -password
+    -whatsapp number
+Dashboard
+    -log history
+    -pogress bar
+    -task today and task done
+    -DTR
+    -

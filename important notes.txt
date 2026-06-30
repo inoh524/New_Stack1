@@ -1,0 +1,45 @@
+https://www.youtube.com/watch?v=EkRuAOsmXm0&list=PLt2fZkYs6q_l2WebLGr6biyk551rLUtLV  <!-- for developing ecommerce reference --> time stamp: 16:41
+https://www.youtube.com/watch?v=gbViwd-QWH8&list=PLo_A1jhXyea7i6R5vE_Kc8bggC7EMk8Zu  <!-- for developing react portfolio reference -->
+https://www.youtube.com/watch?v=c02YoWR9gSY&t=11s <!-- React router-->
+React.dev <!-- React website-->
+
+
+-Failed to resolve import "@/components/ui/card" because vite didn't recognize @ alias
+    = added alias in viteconfig (
+        resolve: {
+  alias: {
+    "@": path.resolve(__dirname, "./src"),
+  },
+}
+    )
+
+-'__dirname' is not defined because Vite uses ES modules
+    = converted to (
+        import { fileURLToPath } from "url"
+    )
+
+shadcn/ui- for ui components
+    -missing shadcn components (Failed to resolve "@/components/ui/card")
+    =needed to add (npx shadcn@latest add card
+                    npx shadcn@latest add carousel) Radix -> Nova
+    
+ESlint warnings(not real errors)
+    -react-refresh/only-export-components
+    =configure eslint.config and add (
+        rules: {
+      "react-refresh/only-export-components": "off"
+    }
+    )
+
+Typescript warning in js.config
+    -baseUrl is deprecated cause "VS Code TypeScript engine warning"
+    =create a "jsconfig.json" file and add (
+        "ignoreDeprecations": "6.0"
+    )
+
+Final shadcn CLI issue 
+    -error: Could not find valid path aliases
+    =add: jsconfig.json
+          Vite alias
+          correct project structure
+
