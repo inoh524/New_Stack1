@@ -1,3 +1,11 @@
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+npm install --save-dev vite //download vite
+
+------------------------------------------------------------------------------------------------------------------------
+
 npx prisma migrate dev --name add-user-account //add table and update
 
 npx prisma migrate dev --name remove-user-account //drop table in prisma model thou shall not manually drop in postgres
