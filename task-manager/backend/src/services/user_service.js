@@ -1,9 +1,15 @@
 const prisma = require("../config/prisma_client");
+const bcrypt = require("bcrypt");
 
 // Create
 exports.create_user = async (data) => {
+  console.log(data);
+  const hashedPassword = await bcrypt.hash(data.password, 10);
   return await prisma.userAccount.create({
-    data,
+    data:{
+      ...data,
+      password: hashedPassword,
+    },
   });
 };
 

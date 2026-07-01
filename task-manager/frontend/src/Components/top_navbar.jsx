@@ -21,21 +21,21 @@ function Top_nav(){
           </Link>
 
           <li>
-            <a href="/about" className="hover:text-blue-400">
+            <Link to="/about" className="hover:text-blue-400">
               About
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a href="#" className="hover:text-blue-400">
+            <Link to="/services" className="hover:text-blue-400">
               Services
-            </a>
+            </Link>
           </li>
 
           <li>
-            <a href="/contact" className="hover:text-blue-400">
+            <Link to="/contact" className="hover:text-blue-400">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

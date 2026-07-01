@@ -26,11 +26,15 @@ model TestUser {
 }
 
 model UserAccount{
-  id Int @id @default(autoincrement())
-  username String @unique
-  email String @unique
-  first_name String @db.VarChar(50)
-  last_name String @db.VarChar(50)
-  middle_name String? @db.VarChar(50)
-  contact_num String @db.VarChar(11)
+  id            Int       @id @default(autoincrement())
+  username      String    @unique
+  email         String    @unique
+  password      String    @db.VarChar(255)
+  first_name    String    @db.VarChar(50)
+  last_name     String    @db.VarChar(50)
+  middle_name   String?   @db.VarChar(50)
+  contact_num   String    @db.VarChar(11)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 }
+

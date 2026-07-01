@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { createUser } from "../api/user_api";
 
 function UserForm() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
+    password: "",
     first_name: "",
     last_name: "",
     middle_name: "",
@@ -17,11 +19,12 @@ function UserForm() {
     });
   };
 
-  const createUser = async () => {
+  const handleCreateUser = async () => {
     // Validation
     if (
       !formData.username ||
       !formData.email ||
+      !formData.password ||
       !formData.first_name ||
       !formData.last_name ||
       !formData.contact_num
@@ -31,22 +34,8 @@ function UserForm() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/users", {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.error || "Failed to create user.");
-        return;
-      }
+      // Call the API function instead of fetch()
+      const data = await createUser(formData);
 
       alert("User created successfully!");
 
@@ -56,6 +45,7 @@ function UserForm() {
       setFormData({
         username: "",
         email: "",
+        password: "",
         first_name: "",
         last_name: "",
         middle_name: "",
@@ -63,7 +53,8 @@ function UserForm() {
       });
     } catch (err) {
       console.error(err);
-      alert("Unable to connect to the server.");
+
+      alert(err.response?.data?.error || "Unable to connect to the server.");
     }
   };
 
@@ -81,7 +72,7 @@ function UserForm() {
             placeholder="Username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2"
           />
 
           <input
@@ -90,7 +81,16 @@ function UserForm() {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2"
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2"
           />
 
           <input
@@ -99,7 +99,7 @@ function UserForm() {
             placeholder="First Name"
             value={formData.first_name}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2"
           />
 
           <input
@@ -108,7 +108,7 @@ function UserForm() {
             placeholder="Last Name"
             value={formData.last_name}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2"
           />
 
           <input
@@ -117,7 +117,7 @@ function UserForm() {
             placeholder="Middle Name (Optional)"
             value={formData.middle_name}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2"
           />
 
           <input
@@ -126,12 +126,12 @@ function UserForm() {
             placeholder="Contact Number"
             value={formData.contact_num}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2"
           />
 
           <button
-            onClick={createUser}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition duration-300 cursor-pointer"
+            onClick={handleCreateUser}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg cursor-pointer"
           >
             Create User
           </button>

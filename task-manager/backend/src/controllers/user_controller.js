@@ -7,10 +7,12 @@ exports.create_user = async (req, res) => {
 
     res.status(201).json(user);
   } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
+  console.error(err);   // <-- Add this
+
+  res.status(500).json({
+    error: err.message,
+  });
+}
 };
 
 // Read All
@@ -20,10 +22,12 @@ exports.get_users = async (req, res) => {
 
     res.json(users);
   } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
+  console.error(err);   // <-- Add this
+
+  res.status(500).json({
+    error: err.message,
+  });
+}
 };
 
 // Read One
@@ -41,10 +45,12 @@ exports.get_user_by_id = async (req, res) => {
 
     res.json(user);
   } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
+  console.error(err);   // <-- Add this
+
+  res.status(500).json({
+    error: err.message,
+  });
+}
 };
 
 // Update
@@ -57,10 +63,12 @@ exports.update_user = async (req, res) => {
 
     res.json(user);
   } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
+  console.error(err);   // <-- Add this
+
+  res.status(500).json({
+    error: err.message,
+  });
+}
 };
 
 // Delete
@@ -72,8 +80,11 @@ exports.delete_user = async (req, res) => {
       message: "User deleted successfully",
     });
   } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
+  console.error(err);   // <-- Add this
+
+  res.status(500).json({
+    error: err.message,
+  });
+}
 };
+
