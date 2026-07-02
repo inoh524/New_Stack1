@@ -65,8 +65,10 @@ function Navbar() {
           ×
         </button>
         <h3 className="font-bold mb-2">User Profile</h3>
-        <p>Name: John Doe</p>
-        <p>Email: johndoe@example.com</p>
+        <p>Login</p>
+        <a href="/login" className="text-blue-500 hover:text-blue-700">
+          Go to Login
+        </a>
       </div>
     )}
     </div>

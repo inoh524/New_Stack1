@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard";
 import About from "./pages/about";
 import Users from "./pages/services";
 import UserForm from "./pages/contact";
+import LoginForm from "./pages/login";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<UserForm />} />
         <Route path="/services" element={<Users />} />
+        <Route path="/login" element={<LoginForm />} />
       </Route>
     </Routes>
   );
