@@ -9,19 +9,24 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const data = await login(email, password);
+  try {
+    const data = await login(email, password);
 
+    if (data?.token) {
       localStorage.setItem("token", data.token);
 
-      navigate("/dashboard");
+      alert("Login successful!");
 
-    } catch (err) {
-      alert(err.response?.data?.error || "Login failed");
+      navigate("/dashboard");
+    } else {
+      alert("Login failed: No token received.");
     }
-  };
+  } catch (err) {
+    alert(err.response?.data?.error || "Login failed");
+  }
+};
 
   return (
     <div>
