@@ -1,71 +1,60 @@
-import {useState} from "react";
-import {loginUser} from "../api/user_api";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../services/auth_service";
 
-function LoginForm() {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
+function Login() {
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-        });  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = await login(email, password);
+
+      localStorage.setItem("token", data.token);
+
+      navigate("/dashboard");
+
+    } catch (err) {
+      alert(err.response?.data?.error || "Login failed");
     }
-    const handleLogin = async (e) => {
-        // Validation
-        e.preventDefault();
-        if (!formData.username || !formData.password) {
-            alert("Please fill in all required fields.");
-            return;
-        }
+  };
 
-        try {
-            // Call the API function instead of fetch()
-            const data = await loginUser(formData);
+  return (
+    <div>
+      <h1>Login</h1>
 
-            alert("Login successful!");
+      <form onSubmit={handleLogin}>
 
-            console.log(data);
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-            setFormData({
-                username: "",
-                password: "",
-            });
-        } catch (error) {
-            alert("Login failed. Please check your credentials.");
-        }
-    }
+        <br /><br />
 
-    return (
-        <div className="flex flex-col items-center justify-center ">
-            <h2 className="py-4 font-bold">LOG IN</h2>
-            <form className="flex flex-col gap-4 w-64">
-                <div>
-                    <label className="block text-gray-700 font-bold mb-2">Username:</label>
-                    <input className="border border-gray-300 rounded-md px-3 py-2 text-black"
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label className="block text-gray-700 font-bold mb-2">Password:</label>
-                    <input className="border border-gray-300 rounded-md px-3 py-2 text-black"
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                    Login
-                </button>
-            </form>
-        </div>
-    );
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <br /><br />
+
+        <button type="submit">
+          Login
+        </button>
+
+      </form>
+
+    </div>
+  );
 }
 
-export default LoginForm;
+export default Login;
