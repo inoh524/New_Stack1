@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../api/user_api";
+import { getMe } from "../api/user_api";
 
 function Users() {
-  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const data = await getUsers();
+        const data = await getMe();
 
         console.log(data);
 
-        setUsers(data);
+        setUser(data);
       } catch (err) {
         console.error(err);
       }
@@ -22,16 +22,16 @@ function Users() {
 
   return (
     <div>
-      <h1>Users</h1>
+      <h1>My Profile</h1>
 
-      {users.map((user) => (
-        <div key={user.id}>
+      {user && (
+        <div>
           <p>{user.username}</p>
           <p>{user.email}</p>
           <p>{user.password}</p>
           <p>{user.contact_num}</p>
         </div>
-      ))}
+      )}
     </div>
   );
 }

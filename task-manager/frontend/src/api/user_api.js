@@ -7,8 +7,8 @@ export const createUser = async (user) => {
 };
 
 // GET
-export const getUsers = async () => {
-  const response = await api.get("/users");
+export const getMe = async () => {
+  const response = await api.get("/users/me");
   return response.data;
 };
 

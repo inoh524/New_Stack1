@@ -1,9 +1,51 @@
 import reactLogo from '../assets/react.svg';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { FaUser, FaShoppingCart, FaBell } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { getMe } from "../api/user_api";    
 
 function Navbar() {
+    const [token, setToken] = useState(localStorage.getItem("token"));
     const [activeModal, setActiveModal] = useState(null);
+    const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+   useEffect(() => {
+  const fetchUser = async () => {
+    if (!token) {
+      setUser(null);
+      return;
+    }
+
+    try {
+      const data = await getMe();
+      setUser(data);
+    } catch (err) {
+      console.error(err);
+      setUser(null);
+    }
+  };
+
+  fetchUser();
+}, [token]);
+
+    const handle_logout = () => {
+      // Clear the authentication token from localStorage
+      localStorage.removeItem('token');
+      setToken(null);
+      setActiveModal(null);
+      navigate("/login");
+    }
+
+    useEffect(() => { //this updates the token state whenever the auth-change event is triggered, ensuring that the Navbar reflects the current authentication status.
+      const updateToken = () => {
+        setToken(localStorage.getItem("token"));
+    };
+        window.addEventListener("auth-change", updateToken);
+     return () => {
+        window.removeEventListener("auth-change", updateToken);
+    };
+    }, []);
+
   return (
     <div className="bg-gray-900 flex items-center justify-between px-4 md:px-10 lg:px-64 py-4"> {/* upper part */}
           <div className="shrink-0"> {/* logo */}
@@ -33,9 +75,9 @@ function Navbar() {
         
     {/* modals */}
     {activeModal === 'notifications' && (
-      <div className="fixed bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
+      <div className="fixed top-36 right-97 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
         <button 
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 hover:cursor-pointer"
+          className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700 hover:cursor-pointer"
           onClick={() => setActiveModal(null)}
         >
           ×
@@ -45,9 +87,9 @@ function Navbar() {
       </div>
     )}
     {activeModal === 'shopping-cart' && (
-      <div className="fixed top-16 right-4 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
+      <div className="fixed top-36 right-78 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
         <button 
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 hover:cursor-pointer"
+          className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700 hover:cursor-pointer"
           onClick={() => setActiveModal(null)}
         >
           ×
@@ -57,18 +99,45 @@ function Navbar() {
       </div>
     )}
     {activeModal === 'user-profile' && (
-      <div className="fixed top-16 right-4 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
+      <div className="fixed top-36 right-60 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
         <button 
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 hover:cursor-pointer"
+          className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700 hover:cursor-pointer"
           onClick={() => setActiveModal(null)}
         >
           ×
         </button>
-        <h3 className="font-bold mb-2">User Profile</h3>
-        <p>Login</p>
+        <h3 className="font-bold">User Profile</h3>
+        <div className="text-gray-600 pb-4">
+          {token && user ? (
+            <>
+            <p>Name: {user.first_name} {user.last_name}</p>
+            </>
+          ) : (
+            <p>No Account signed in</p>
+          )}
+        </div>
+        <div className="flex flex-col gap-1">
+
+          {!token && (
+            <a href="/register" className="text-blue-500 hover:text-blue-700">
+              Sign Up
+            </a>
+          )}
+           
+         {token ? (
+        <button
+          onClick={handle_logout}
+          className="text-left text-red-500 hover:text-red-700 hover:cursor-pointer"
+        >
+          Logout
+        </button>
+      ) : (
         <a href="/login" className="text-blue-500 hover:text-blue-700">
-          Go to Login
+          Login
         </a>
+      )}
+
+        </div>
       </div>
     )}
     </div>
