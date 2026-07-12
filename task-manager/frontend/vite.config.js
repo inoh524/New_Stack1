@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename)
 
 export default defineConfig({
   plugins: [tailwindcss(), react()],
+  BASE: process.env.VITE_BASE_PATH || "/task-manager/frontend",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
