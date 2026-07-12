@@ -1,5 +1,5 @@
 import Content from "@/Components/content";
-import Video from "../Components/Videos.jsx";
+// import Video from "../Components/Videos.jsx";
 import { CarouselDemo } from "../Components/carousel.jsx";
 
 
@@ -11,7 +11,7 @@ function Dashboard(){
         </div>
         <div>
           <Content/>
-          <Video />
+          {/* <Video /> */}
         </div>
       </div>
     );
