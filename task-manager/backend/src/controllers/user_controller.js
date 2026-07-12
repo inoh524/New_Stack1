@@ -15,7 +15,22 @@ exports.create_user = async (req, res) => {
 }
 };
 
-// Read All
+// Read users
+exports.get_me = async (req, res) => {
+  try {
+    const user = await user_service.get_user_by_id(req.user.id);
+
+    res.json(user);
+  } catch (err) {
+  console.error(err);   // <-- Add this
+
+  res.status(500).json({
+    error: err.message,
+  });
+}
+};
+
+//admin can see all users
 exports.get_users = async (req, res) => {
   try {
     const users = await user_service.get_users();
@@ -52,6 +67,23 @@ exports.get_user_by_id = async (req, res) => {
   });
 }
 };
+
+// update user
+exports.update_me = async (req, res) => {
+  try {
+    const user = await user_service.update_user(
+      req.user.id,
+      req.body
+    );
+  } catch (err) {
+  console.error(err);
+  
+  res.status(500).json({
+    error: err.message,
+  });
+  }
+}
+
 
 // Update
 exports.update_user = async (req, res) => {

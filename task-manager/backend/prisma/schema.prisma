@@ -34,6 +34,7 @@ model UserAccount{
   last_name     String    @db.VarChar(50)
   middle_name   String?   @db.VarChar(50)
   contact_num   String    @db.VarChar(11)
+  role          String    @default("user")
   created_at    DateTime  @default(now())
   updated_at    DateTime  @updatedAt
 }

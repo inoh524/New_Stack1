@@ -18,10 +18,26 @@ exports.get_users = async () => {
   return await prisma.userAccount.findMany();
 };
 
-// Read One
+// // Read One
+// exports.get_user_by_id = async (id) => {
+//   return await prisma.userAccount.findUnique({
+//     where: { id },
+//   });
+// };
 exports.get_user_by_id = async (id) => {
   return await prisma.userAccount.findUnique({
-    where: { id },
+    where: {
+      id: Number(id),
+    },
+    select: {
+      id: true,
+      username: true,
+      first_name: true,
+      last_name: true,
+      contact_num: true,
+      email: true,
+      created_at: true,
+    },
   });
 };
 
@@ -39,3 +55,10 @@ exports.delete_user = async (id) => {
     where: { id },
   });
 };
+
+//self learn
+exports.get_user_by_email = async (email) => {
+  return await prisma.userAccount.findUnique({
+    where: { email },
+  });
+}

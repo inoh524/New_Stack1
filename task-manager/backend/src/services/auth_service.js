@@ -13,11 +13,12 @@ exports.login_user = async (email, password) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) { //if not match, throw error
     throw new Error("Invalid email or password");
-  } //if match, generate token and return user data
-    const token = jwt.sign(
+  } 
+    const token = jwt.sign( //if match, generate token and return user data
   {
     id: user.id,
     email: user.email,
+    role: user.role,
   },
   process.env.JWT_SECRET,
   {
