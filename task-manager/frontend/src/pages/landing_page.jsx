@@ -1,5 +1,5 @@
 import Content from "@/Components/content";
-import Video from "../Components/videos.jsx";
+import Video from "../Components/Videos.jsx";
 import { CarouselDemo } from "../Components/carousel.jsx";
 
 
