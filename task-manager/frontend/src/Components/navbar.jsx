@@ -99,7 +99,7 @@ function Navbar() {
       </div>
     )}
     {activeModal === 'user-profile' && (
-      <div className="fixed top-36 right-60 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
+      <div className="fixed top-36 right-12 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
         <button 
           className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700 hover:cursor-pointer"
           onClick={() => setActiveModal(null)}
