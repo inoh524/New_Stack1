@@ -1,12 +1,12 @@
 
-import { CardContent } from "@/components/ui/card";
+import { CardContent } from "@/Components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/Components/ui/carousel"
 import image1 from "../assets/meme.jpg";
 import image2 from "../assets/meme1.jpg";
 import image3 from "../assets/meme2.jpg";

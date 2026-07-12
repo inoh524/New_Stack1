@@ -1,4 +1,4 @@
-import Thumbnail from "./thumbnail";
+import Thumbnail from "./Thumbnail";
 import LikeButton from "./like_button.jsx";
 
 function Video() {
