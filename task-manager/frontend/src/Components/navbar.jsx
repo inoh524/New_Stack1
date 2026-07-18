@@ -1,149 +1,178 @@
-import reactLogo from '../assets/react.svg';
-import {useState, useEffect} from 'react';
-import { FaUser, FaShoppingCart, FaBell } from "react-icons/fa";
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { getMe } from "../api/user_api";    
+import { getMe } from "../api/user_api";
 
 function Navbar() {
-    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [token, setToken] = useState(sessionStorage.getItem("token"));
     const [activeModal, setActiveModal] = useState(null);
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
-   useEffect(() => {
-  const fetchUser = async () => {
-    if (!token) {
-      setUser(null);
-      return;
-    }
+    useEffect(() => {
+        const fetchUser = async () => {
+            if (!token) {
+                setUser(null);
+                return;
+            }
 
-    try {
-      const data = await getMe();
-      setUser(data);
-    } catch (err) {
-      console.error(err);
-      setUser(null);
-    }
-  };
+            try {
+                const data = await getMe();
+                setUser(data);
+            } catch (err) {
+                console.error(err);
+                setUser(null);
+            }
+        };
 
-  fetchUser();
-}, [token]);
+        fetchUser();
+    }, [token]);
 
     const handle_logout = () => {
-      // Clear the authentication token from localStorage
-      localStorage.removeItem('token');
-      setToken(null);
-      setActiveModal(null);
-      navigate("/login");
+        // Clear the authentication token from localStorage
+        sessionStorage.removeItem('token');
+        setToken(null);
+        setActiveModal(null);
+        navigate("/login");
     }
 
     useEffect(() => { //this updates the token state whenever the auth-change event is triggered, ensuring that the Navbar reflects the current authentication status.
-      const updateToken = () => {
-        setToken(localStorage.getItem("token"));
-    };
+        const updateToken = () => {
+            setToken(sessionStorage.getItem("token"));
+        };
         window.addEventListener("auth-change", updateToken);
-     return () => {
-        window.removeEventListener("auth-change", updateToken);
-    };
+        return () => {
+            window.removeEventListener("auth-change", updateToken);
+        };
     }, []);
 
-  return (
-    <div className="bg-gray-900 flex items-center justify-between px-4 md:px-10 lg:px-64 py-4"> {/* upper part */}
-          <div className="shrink-0"> {/* logo */}
-            <a href="/">
-              <img src={reactLogo} alt="React Logo" className="h-14 w-14 md:h-20 md:w-20 lg:h-25 lg:w-25"/>
-            </a>
-          </div>
-          <div className="flex-1 flex justify-center"> {/* search bar */}
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full max-w-xs md:max-w-md md:h-12 lg:max-w-3/5 lg:h-14 border border-gray-300 rounded-md px-3 py-2 text-white"
-            />
-          </div>
-          <div className="flex items-center gap-12 shrink-0"> {/* icons */}
-            <FaBell className="text-2xl text-gray-600 hover:text-blue-400 cursor-pointer" 
-            onClick={() => setActiveModal('notifications')}
-            />
-            <FaShoppingCart className="text-2xl text-gray-600 hover:text-blue-400 cursor-pointer " 
-            onClick={() => setActiveModal('shopping-cart')}
-            />
-            <FaUser className="text-2xl text-gray-600 hover:text-blue-400 cursor-pointer " 
-            onClick={() => setActiveModal('user-profile')}  
-            />
-          </div>
+    return (
+        <div className=" bg-[#01161f] flex justify-center items-center px-60 gap-110"> {/* upper part */}
+            <div className="px-4 md:px-10 lg:px-10 py-6">
+                <a href="/dashboard" className="relative flex font-mono font-bold text-4xl text-white hover:text-[#00fffb] 
+                after:absolute
+                after:left-0
+                after:-bottom-1
+                after:h-0.5
+                after:w-0
+                after:bg-[#00fffb]
+                after:transition-all
+                after:duration-300
+                hover:after:w-full
+                cursor-pointer">
+                    Portfolio <a className="text-[#00fffb]">/</a>
+                </a>
+            </div>
 
-        
-    {/* modals */}
-    {activeModal === 'notifications' && (
-      <div className="fixed top-36 right-97 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
-        <button 
-          className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700 hover:cursor-pointer"
-          onClick={() => setActiveModal(null)}
-        >
-          ×
-        </button>
-        <h3 className="font-bold mb-2">Notifications</h3>
-        <p>You have 3 new notifications.</p>
-      </div>
-    )}
-    {activeModal === 'shopping-cart' && (
-      <div className="fixed top-36 right-78 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
-        <button 
-          className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700 hover:cursor-pointer"
-          onClick={() => setActiveModal(null)}
-        >
-          ×
-        </button>
-        <h3 className="font-bold mb-2">Shopping Cart</h3>
-        <p>Your cart is empty.</p>
-      </div>
-    )}
-    {activeModal === 'user-profile' && (
-      <div className="fixed top-36 right-12 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
-        <button 
-          className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700 hover:cursor-pointer"
-          onClick={() => setActiveModal(null)}
-        >
-          ×
-        </button>
-        <h3 className="font-bold">User Profile</h3>
-        <div className="text-gray-600 pb-4">
-          {token && user ? (
-            <>
-            <p>Name: {user.first_name} {user.last_name}</p>
-            </>
-          ) : (
-            <p>No Account signed in</p>
-          )}
+
+            {/*icons color [#00fffb] */}
+            <div className="flex gap-12 px-4 md:px-10 lg:px-24 py-20"> {/* nav */}
+
+                <a href="/about" className="relative text-white text-2xl font-mono font-light hover:text-[#00fffb] 
+                    after:absolute
+                    after:left-0
+                    after:-bottom-1
+                    after:h-0.5
+                    after:w-0
+                  after:bg-[#00fffb]
+                    after:transition-all
+                    after:duration-300
+                    hover:after:w-full
+                    cursor-pointer">
+                    About
+                </a>
+
+                <a href="/services" className="relative text-white text-2xl font-mono font-light hover:text-[#00fffb] 
+                    after:absolute
+                    after:left-0
+                    after:-bottom-1
+                    after:h-0.5
+                    after:w-0
+                  after:bg-[#00fffb]
+                    after:transition-all
+                    after:duration-300
+                    hover:after:w-full
+                    cursor-pointer">
+                    Projects
+                </a>
+
+                <a href="/contact" className="relative text-white text-2xl font-mono font-light hover:text-[#00fffb] 
+                    after:absolute
+                    after:left-0
+                    after:-bottom-1
+                    after:h-0.5
+                    after:w-0
+                  after:bg-[#00fffb]
+                    after:transition-all
+                    after:duration-300
+                    hover:after:w-full
+                    cursor-pointer">
+                    Contact
+                </a>
+
+                <div className="relative">
+                    <a className="relative text-white text-2xl font-mono font-light hover:text-[#00fffb] 
+                    after:absolute
+                    after:left-0
+                    after:-bottom-1
+                    after:h-0.5
+                    after:w-0
+                  after:bg-[#00fffb]
+                    after:transition-all
+                    after:duration-300
+                    hover:after:w-full
+                    cursor-pointer" onClick={() => setActiveModal('user-profile')}  >
+                        Login
+                    </a>
+
+                    {activeModal === 'user-profile' && (
+                        <div className="absolute top-full right-0 bg-white border border-gray-300 rounded-md shadow-lg p-4 w-64">
+                            <button
+                                className="absolute top-2 right-2 text-2xl text-gray-500 hover:text-gray-700 hover:cursor-pointer"
+                                onClick={() => setActiveModal(null)}
+                            >
+                                ×
+                            </button>
+                            <h5 className="font-bold text-red-600">"Made this just to try"</h5>
+                            <h3 className="font-bold">User Profile</h3>
+                            <div className="text-gray-600 pb-4">
+                                {token && user ? (
+                                    <>
+                                        <p>Name: {user.first_name} {user.last_name}</p>
+                                    </>
+                                ) : (
+                                    <p>No Account signed in</p>
+                                )}
+                            </div>
+                            <div className="flex flex-col gap-1">
+
+                                {!token && (
+                                    <a href="/register" className="text-blue-500 hover:text-blue-700">
+                                        Sign Up
+                                    </a>
+                                )}
+
+                                {token ? (
+                                    <button
+                                        onClick={handle_logout}
+                                        className="text-left text-red-500 hover:text-red-700 hover:cursor-pointer"
+                                    >
+                                        Logout
+                                    </button>
+                                ) : (
+                                    <a href="/login" className="text-blue-500 hover:text-blue-700">
+                                        Login
+                                    </a>
+                                )}
+
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
         </div>
-        <div className="flex flex-col gap-1">
 
-          {!token && (
-            <a href="/register" className="text-blue-500 hover:text-blue-700">
-              Sign Up
-            </a>
-          )}
-           
-         {token ? (
-        <button
-          onClick={handle_logout}
-          className="text-left text-red-500 hover:text-red-700 hover:cursor-pointer"
-        >
-          Logout
-        </button>
-      ) : (
-        <a href="/login" className="text-blue-500 hover:text-blue-700">
-          Login
-        </a>
-      )}
+    );
 
-        </div>
-      </div>
-    )}
-    </div>
-        
-  );
-  
 };
 
 export default Navbar;

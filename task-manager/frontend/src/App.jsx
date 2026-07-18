@@ -7,7 +7,8 @@ import About from "./pages/about";
 import Users from "./pages/services";
 import LoginForm from "./pages/login";
 import UserForm from "./pages/signup";
-
+import Contact from "./pages/contact";
+import ProtectedRoute from "./Components/protected_route";
 
 function App() {
   return (
@@ -15,11 +16,13 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Landing_page />} />
         <Route path="/about" element={<About />} />
-        {/* <Route path="/contact" element={<UserForm />} /> */}
+        <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Users />} />
         <Route path="/register" element={<UserForm />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Route>
     </Routes>
   );

@@ -16,16 +16,16 @@ function Login() {
     const data = await login(email, password);
 
     if (data?.token) {
-      localStorage.setItem("token", data.token);
+      sessionStorage.setItem("token", data.token);
       window.dispatchEvent(new Event("auth-change"));// Notify other components about the auth change 
       alert("Login successful!");
-      navigate("/");
+      navigate("/dashboard");
 
     } else {
       alert("Login failed: No token received.");
     }
   } catch (err) {
-    alert(err.response?.data?.error || "Login failed");
+    alert(err.response?.data?.error || "Login failed: Backend Service is offline, Try to reach out the admin.");
   } finally {
     setLoading(false);
   }

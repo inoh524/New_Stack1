@@ -23,14 +23,14 @@ export function CarouselDemo() {
             <div className="p-0">
                 <CardContent className="flex aspect-square items-center justify-center p-0">
                   <img src={images[index % images.length]} alt={`Slide ${index + 1}`}
-                    className="w-full aspect-square object-cover rounded-md" />
+                    className="w-full aspect-square object-cover rounded-md " />
                 </CardContent>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent >
-      <CarouselPrevious className="opacity-0 group-hover:opacity-100 transition-duration-300 cursor-pointer" />
-      <CarouselNext className="opacity-0 group-hover:opacity-100 transition-duration-300 cursor-pointer" />
+      <CarouselPrevious className="opacity-0 group-hover:opacity-100 transition-duration-300 cursor-pointer text-[#00fffb] font-bold" />
+      <CarouselNext className="opacity-0 group-hover:opacity-100 transition-duration-300 cursor-pointer text-[#00fffb] font-bold" />
     </Carousel>
   )
 }

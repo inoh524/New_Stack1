@@ -49,7 +49,7 @@
 }
 
 :root {
-    --background: #f8fafc; /* site bg */
+    --background: #00131d ; /* site bg */
     --foreground: #0f172a; /* text */
     --card: #ffffff; /* card bg */
     --card-foreground: #0f172a; /* card text */
@@ -128,3 +128,4 @@
     @apply font-sans;
     }
 }
+
