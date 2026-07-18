@@ -67,7 +67,7 @@ function Login() {
           </p>
           <p className="text-gray-600 mt-2 text-sm"> 
             test user: <br />
-            inohsusano08@gmail.com <br />
+            inoh@gmail.com <br />
             inoh08
           </p>
         </div>
